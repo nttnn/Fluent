@@ -1,7 +1,7 @@
 
 --- button
-local Show_Button = true
-local Button_Icon = "90741476811344"
+local Show_Button = false
+local Button_Icon = ""
 ---
 
 local Lighting = game:GetService("Lighting")
