@@ -3819,15 +3819,28 @@ ElementsTable.Dropdown = (function()
 		table.insert(Library.OpenFrames, DropdownHolderCanvas)
 
 		local function RecalculateListPosition()
-			local Add = -40
-			if (Camera and Camera.ViewportSize.Y or 600) - DropdownInner.AbsolutePosition.Y < DropdownHolderCanvas.AbsoluteSize.Y - 5 then
-				Add = DropdownHolderCanvas.AbsoluteSize.Y
-				- 5
-				- ((Camera and Camera.ViewportSize.Y or 600) - DropdownInner.AbsolutePosition.Y)
-					+ 40
-			end
-			DropdownHolderCanvas.Position =
-				UDim2.fromOffset(DropdownInner.AbsolutePosition.X - 1, DropdownInner.AbsolutePosition.Y - 5 - Add)
+		    local screenHeight = (Camera and Camera.ViewportSize.Y or 600)
+		    local buttonAbsPos = DropdownInner.AbsolutePosition
+		    local buttonAbsSize = DropdownInner.AbsoluteSize
+		    local listAbsSize = DropdownHolderCanvas.AbsoluteSize
+		
+		    local finalY
+		    
+		    -- ตรวจสอบว่าถ้าแสดงผลด้านล่าง จะทะลุจอหรือไม่
+		    if buttonAbsPos.Y + buttonAbsSize.Y + listAbsSize.Y > screenHeight then
+		        -- ถ้าทะลุ ให้แสดงผลไว้ด้านบนของปุ่มแทน
+		        finalY = buttonAbsPos.Y - listAbsSize.Y
+		    else
+		        -- ถ้าไม่ทะลุ ให้แสดงผลไว้ด้านล่างตามปกติ
+		        finalY = buttonAbsPos.Y + buttonAbsSize.Y 
+		    end
+		
+		    -- ตรวจสอบอีกครั้งว่าตำแหน่งที่คำนวณได้ ทะลุด้านบนของจอหรือไม่
+		    if finalY < 0 then
+		        finalY = 5 -- ถ้าทะลุ ให้ยึดกับขอบบนสุดของจอ (เว้นระยะเล็กน้อย)
+		    end
+		
+		    DropdownHolderCanvas.Position = UDim2.fromOffset(buttonAbsPos.X - 1, finalY) 
 		end
 
 		local ListSizeX = 0
