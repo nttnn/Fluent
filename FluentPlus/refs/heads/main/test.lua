@@ -6699,18 +6699,21 @@ local MinimizeButton = New("TextButton", {
 		New("UIAspectRatioConstraint", {
 			AspectRatio = 1,
 			AspectType = Enum.AspectType.FitWithinMaxSize,
+		}),
+		-- เพิ่มเข้ามาใหม่: ทำให้ไอคอนโค้งมน
+		New("UICorner", {
+			CornerRadius = UDim.new(0, 8)
 		})
 	})
 })
 
 local Minimizer
-
 local Dragging, DragInput, MousePos, StartPos = false
 
 if Mobile then
 	Minimizer = New("Frame", {
 		Parent = GUI,
-		Size = UDim2.new(0, 64, 0, 64), -- เปลี่ยนแปลง: ปรับขนาดเป็น 64x64 pixels
+		Size = UDim2.new(0, 64, 0, 64),
 		Position = UDim2.new(0.45, 0, 0.025, 0),
 		BackgroundTransparency = 1,
 		ZIndex = 999999999,
@@ -6719,7 +6722,7 @@ if Mobile then
 		New("Frame", {
 			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundTransparency = 1, -- เปลี่ยนแปลง: ทำให้พื้นหลังโปร่งใสเพื่อลบเงา
+			BackgroundTransparency = 1,
 			BorderSizePixel = 0
 		}, {
 			New("UICorner", {
@@ -6731,17 +6734,17 @@ if Mobile then
 else
 	Minimizer = New("Frame", {
 		Parent = GUI,
-		Size = UDim2.new(0, 64, 0, 64), -- เปลี่ยนแปลง: ปรับขนาดเป็น 64x64 pixels
+		Size = UDim2.new(0, 64, 0, 64),
 		Position = UDim2.new(0.45, 0, 0.025, 0),
 		BackgroundTransparency = 1,
 		ZIndex = 999999999,
-		Visible = true -- เปลี่ยนแปลง: ทำให้มองเห็นปุ่ม
+		Visible = true
 	},
 	{
 		New("Frame", {
 			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundTransparency = 1, -- เปลี่ยนแปลง: ทำให้พื้นหลังโปร่งใสเพื่อลบเงา
+			BackgroundTransparency = 1,
 			BorderSizePixel = 0
 		}, {
 			New("UICorner", {
@@ -6752,7 +6755,8 @@ else
 	})
 end
 
-Creator.AddSignal(Minimizer.InputBegan, function(Input)
+-- เปลี่ยนแปลง: ย้าย Signal มาที่ MinimizeButton เพื่อให้ลากได้
+Creator.AddSignal(MinimizeButton.InputBegan, function(Input)
 	if
 		Input.UserInputType == Enum.UserInputType.MouseButton1
 		or Input.UserInputType == Enum.UserInputType.Touch
