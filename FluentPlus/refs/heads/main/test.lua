@@ -1,8 +1,8 @@
 
 --- button
 local Show_Button = true
-local Button_Icon = "rbxassetid://114237935341598"
-local Button_Icon_Minimized ="rbxassetid://114237935341598"
+local Button_Icon = "rbxassetid://112505155786424"
+local Button_Icon_Minimized ="rbxassetid://112505155786424"
 ---
 
 local Lighting = game:GetService("Lighting")
