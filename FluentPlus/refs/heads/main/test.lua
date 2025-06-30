@@ -2,6 +2,7 @@
 --- button
 local Show_Button = true
 local Button_Icon = "rbxassetid://114237935341598"
+local Button_Icon_Minimized ="rbxassetid://114237935341598"
 ---
 
 local Lighting = game:GetService("Lighting")
@@ -3455,7 +3456,7 @@ Components.Window = (function()
 					if minimizeButton then
 						local imageLabel = minimizeButton:FindFirstChild("ImageLabel")
 						if imageLabel then
-							imageLabel.Image = Button_Icon
+							imageLabel.Image = Window.Minimized and Button_Icon_Minimized or Button_Icon
 						end
 					end
 				end)
