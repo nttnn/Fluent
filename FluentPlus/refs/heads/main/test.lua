@@ -6705,10 +6705,12 @@ local MinimizeButton = New("TextButton", {
 
 local Minimizer
 
+local Dragging, DragInput, MousePos, StartPos = false
+
 if Mobile then
 	Minimizer = New("Frame", {
 		Parent = GUI,
-		Size = UDim2.new(0.08, 1, 0.1642, 1),
+		Size = UDim2.new(0, 64, 0, 64), -- เปลี่ยนแปลง: ปรับขนาดเป็น 64x64 pixels
 		Position = UDim2.new(0.45, 0, 0.025, 0),
 		BackgroundTransparency = 1,
 		ZIndex = 999999999,
@@ -6717,7 +6719,7 @@ if Mobile then
 		New("Frame", {
 			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundTransparency = 0.5,
+			BackgroundTransparency = 1, -- เปลี่ยนแปลง: ทำให้พื้นหลังโปร่งใสเพื่อลบเงา
 			BorderSizePixel = 0
 		}, {
 			New("UICorner", {
@@ -6729,17 +6731,17 @@ if Mobile then
 else
 	Minimizer = New("Frame", {
 		Parent = GUI,
-		Size = UDim2.new(0, 0, 0, 0),
+		Size = UDim2.new(0, 64, 0, 64), -- เปลี่ยนแปลง: ปรับขนาดเป็น 64x64 pixels
 		Position = UDim2.new(0.45, 0, 0.025, 0),
 		BackgroundTransparency = 1,
 		ZIndex = 999999999,
-		Visible = false
+		Visible = true -- เปลี่ยนแปลง: ทำให้มองเห็นปุ่ม
 	},
 	{
 		New("Frame", {
 			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
-			Size = UDim2.new(0, 0, 0, 0),
-			BackgroundTransparency = 0,
+			Size = UDim2.new(1, 0, 1, 0),
+			BackgroundTransparency = 1, -- เปลี่ยนแปลง: ทำให้พื้นหลังโปร่งใสเพื่อลบเงา
 			BorderSizePixel = 0
 		}, {
 			New("UICorner", {
