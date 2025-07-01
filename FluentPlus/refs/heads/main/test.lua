@@ -3055,8 +3055,8 @@ Components.Window = (function()
 		})
 
 		Window.TabHolder = New("ScrollingFrame", {
-			Size = UDim2.new(1, 0, 1, -45),
-			Position = UDim2.new(0, 0, 0, 45),
+			Size = UDim2.new(1, 0, 1, 0), -- แก้ไขตรงนี้
+			Position = UDim2.new(0, 0, 0, 0), -- แก้ไขตรงนี้
 			BackgroundTransparency = 1,
 			ScrollBarImageTransparency = 1,
 			ScrollBarThickness = 0,
