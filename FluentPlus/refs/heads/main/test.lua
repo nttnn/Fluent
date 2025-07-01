@@ -3276,15 +3276,16 @@ Components.Window = (function()
 		local LastValue = 0
 		local LastTime = 0
 		Window.SelectorPosMotor:onStep(function(Value)
-			Selector.Position = UDim2.new(0, 0, 0, Value + 17 + 45)
-			local Now = tick()
-			local DeltaTime = Now - LastTime
-
-			if LastValue ~= nil then
-				Window.SelectorSizeMotor:setGoal(Spring((math.abs(Value - LastValue) / (DeltaTime * 60)) + 16))
-				LastValue = Value
-			end
-			LastTime = Now
+		    Selector.Position = UDim2.new(0, 0, 0, Value + 17) -- << แก้ไขจุดที่ 1 (ลบ + 45 ออก)
+		    local Now = tick()
+		    local DeltaTime = Now - LastTime
+		
+		    if LastValue ~= nil then
+		        -- vvv แก้ไขจุดที่ 2 (ตั้งค่าความสูงไปที่ 34 โดยตรง)
+		        Window.SelectorSizeMotor:setGoal(Spring(34)) 
+		        LastValue = Value
+		    end
+		    LastTime = Now
 		end)
 
 		Window.SelectorSizeMotor:onStep(function(Value)
