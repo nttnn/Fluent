@@ -3073,6 +3073,7 @@ Components.Window = (function()
 		local SearchElements = {}
 		local AllElements = {}
 
+		--[[
 		local function UpdateElementVisibility(searchTerm)
 			searchTerm = string.lower(searchTerm or "")
 
@@ -3099,6 +3100,7 @@ Components.Window = (function()
 				end
 			end)
 		end
+		--]]
 
 		local function RegisterElement(elementFrame, title, elementType, description)
 			if elementFrame and title then
@@ -3110,7 +3112,7 @@ Components.Window = (function()
 			end
 		end
 
-
+		--[[
 		local SearchFrame = New("Frame", {
 			Size = UDim2.new(1, 0, 0, 35),
 			Position = UDim2.new(0, 0, 0, 0),
@@ -3139,13 +3141,6 @@ Components.Window = (function()
 		SearchTextbox.Input.PlaceholderText = "Search..."
 		SearchTextbox.Input.Text = ""
 
-
-
-
-
-
-
-
 		local SearchIcon = New("ImageLabel", {
 			Size = UDim2.fromOffset(18, 18),
 			Position = UDim2.new(1, -18, 0.5, 0),
@@ -3157,7 +3152,6 @@ Components.Window = (function()
 				ImageColor3 = "SubText",
 			},
 		})
-
 
 		Creator.AddSignal(SearchTextbox.Input:GetPropertyChangedSignal("Text"), function()
 			local searchText = SearchTextbox.Input.Text
@@ -3176,12 +3170,12 @@ Components.Window = (function()
 				SearchTextbox.Input:ReleaseFocus()
 			end
 		end)
-
+		--]]
 
 		Window.SearchElements = SearchElements
 		Window.AllElements = AllElements
 		Window.RegisterElement = RegisterElement
-		Window.UpdateElementVisibility = UpdateElementVisibility
+		-- Window.UpdateElementVisibility = UpdateElementVisibility -- Commented out
 
 		local TabFrame = New("Frame", {
 			Size = UDim2.new(0, Window.TabWidth, 1, -66),
@@ -3191,7 +3185,7 @@ Components.Window = (function()
 		}, {
 			Window.TabHolder,
 			Selector,
-			SearchFrame,
+			-- SearchFrame, -- Commented out
 		})
 
 		Window.TabDisplay = New("TextLabel", {
